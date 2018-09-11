@@ -87,3 +87,4 @@ set_location_assignment PIN_81 -to k[1]
 set_location_assignment PIN_80 -to k[2]
 set_global_assignment -name VHDL_FILE show.vhd
 set_global_assignment -name VHDL_FILE sound.vhd
+set_global_assignment -name VHDL_FILE music.vhd

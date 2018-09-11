@@ -1,5 +1,5 @@
 Analysis & Synthesis report for test
-Tue Sep 11 22:48:37 2018
+Tue Sep 11 23:23:03 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -14,9 +14,9 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Registers Removed During Synthesis
-  9. Parameter Settings for Inferred Entity Instance: sound:inst6|lpm_counter:cnt_rtl_0
- 10. Parameter Settings for Inferred Entity Instance: test:inst|lpm_counter:count5_rtl_0
- 11. Parameter Settings for Inferred Entity Instance: test:inst|lpm_counter:alarm5_rtl_0
+  9. Parameter Settings for Inferred Entity Instance: sound:inst3|lpm_counter:cnt_rtl_0
+ 10. Parameter Settings for Inferred Entity Instance: test:inst1|lpm_counter:count5_rtl_0
+ 11. Parameter Settings for Inferred Entity Instance: test:inst1|lpm_counter:alarm5_rtl_0
  12. Analysis & Synthesis Messages
 
 
@@ -43,7 +43,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +-----------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Tue Sep 11 22:48:37 2018           ;
+; Analysis & Synthesis Status ; Successful - Tue Sep 11 23:23:03 2018           ;
 ; Quartus II 64-Bit Version   ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name               ; test                                            ;
 ; Top-level Entity Name       ; Block1                                          ;
@@ -138,6 +138,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Block1.bdf                       ; yes             ; User Block Diagram/Schematic File  ; C:/Users/bread/Desktop/vhdl/vhdl/zyq2/test2/Block1.bdf                ;         ;
 ; show.vhd                         ; yes             ; User VHDL File                     ; C:/Users/bread/Desktop/vhdl/vhdl/zyq2/test2/show.vhd                  ;         ;
 ; sound.vhd                        ; yes             ; User VHDL File                     ; C:/Users/bread/Desktop/vhdl/vhdl/zyq2/test2/sound.vhd                 ;         ;
+; music.vhd                        ; yes             ; User VHDL File                     ; C:/Users/bread/Desktop/vhdl/vhdl/zyq2/test2/music.vhd                 ;         ;
 ; lpm_counter.tdf                  ; yes             ; Megafunction                       ; d:/quartus ii/quartus/libraries/megafunctions/lpm_counter.tdf         ;         ;
 ; lpm_constant.inc                 ; yes             ; Megafunction                       ; d:/quartus ii/quartus/libraries/megafunctions/lpm_constant.inc        ;         ;
 ; lpm_decode.inc                   ; yes             ; Megafunction                       ; d:/quartus ii/quartus/libraries/megafunctions/lpm_decode.inc          ;         ;
@@ -168,20 +169,21 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------+----------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                              ;
-+----------------------------------+------------+------+--------------------------------------------+--------------+
-; Compilation Hierarchy Node       ; Macrocells ; Pins ; Full Hierarchy Name                        ; Library Name ;
-+----------------------------------+------------+------+--------------------------------------------+--------------+
-; |Block1                          ; 114        ; 34   ; |Block1                                    ; work         ;
-;    |chooseone:inst4|             ; 0          ; 0    ; |Block1|chooseone:inst4                    ; work         ;
-;    |show:inst5|                  ; 30         ; 0    ; |Block1|show:inst5                         ; work         ;
-;    |sound:inst6|                 ; 15         ; 0    ; |Block1|sound:inst6                        ; work         ;
-;       |lpm_counter:cnt_rtl_0|    ; 12         ; 0    ; |Block1|sound:inst6|lpm_counter:cnt_rtl_0  ; work         ;
-;    |test:inst|                   ; 69         ; 0    ; |Block1|test:inst                          ; work         ;
-;       |lpm_counter:alarm5_rtl_0| ; 4          ; 0    ; |Block1|test:inst|lpm_counter:alarm5_rtl_0 ; work         ;
-;       |lpm_counter:count5_rtl_0| ; 4          ; 0    ; |Block1|test:inst|lpm_counter:count5_rtl_0 ; work         ;
-+----------------------------------+------------+------+--------------------------------------------+--------------+
++-------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                               ;
++----------------------------------+------------+------+---------------------------------------------+--------------+
+; Compilation Hierarchy Node       ; Macrocells ; Pins ; Full Hierarchy Name                         ; Library Name ;
++----------------------------------+------------+------+---------------------------------------------+--------------+
+; |Block1                          ; 114        ; 34   ; |Block1                                     ; work         ;
+;    |chooseone:inst|              ; 0          ; 0    ; |Block1|chooseone:inst                      ; work         ;
+;    |music:inst6|                 ; 21         ; 0    ; |Block1|music:inst6                         ; work         ;
+;    |show:inst4|                  ; 30         ; 0    ; |Block1|show:inst4                          ; work         ;
+;    |sound:inst3|                 ; 15         ; 0    ; |Block1|sound:inst3                         ; work         ;
+;       |lpm_counter:cnt_rtl_0|    ; 12         ; 0    ; |Block1|sound:inst3|lpm_counter:cnt_rtl_0   ; work         ;
+;    |test:inst1|                  ; 48         ; 0    ; |Block1|test:inst1                          ; work         ;
+;       |lpm_counter:alarm5_rtl_0| ; 4          ; 0    ; |Block1|test:inst1|lpm_counter:alarm5_rtl_0 ; work         ;
+;       |lpm_counter:count5_rtl_0| ; 4          ; 0    ; |Block1|test:inst1|lpm_counter:count5_rtl_0 ; work         ;
++----------------------------------+------------+------+---------------------------------------------+--------------+
 
 
 +--------------------------------------------------------------------------------+
@@ -189,16 +191,16 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------+----------------------------------------+
 ; Register name                         ; Reason for Removal                     ;
 +---------------------------------------+----------------------------------------+
-; test:inst|freq[3]                     ; Stuck at GND due to stuck port data_in ;
-; test:inst|freq[1]                     ; Merged with test:inst|freq[7]          ;
-; test:inst|freq[0]                     ; Merged with test:inst|freq[6]          ;
-; test:inst|freq[2,4]                   ; Merged with test:inst|freq[5]          ;
+; music:inst6|freq[3]                   ; Stuck at GND due to stuck port data_in ;
+; music:inst6|freq[1]                   ; Merged with music:inst6|freq[7]        ;
+; music:inst6|freq[0]                   ; Merged with music:inst6|freq[6]        ;
+; music:inst6|freq[2,4]                 ; Merged with music:inst6|freq[5]        ;
 ; Total Number of Removed Registers = 5 ;                                        ;
 +---------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: sound:inst6|lpm_counter:cnt_rtl_0 ;
+; Parameter Settings for Inferred Entity Instance: sound:inst3|lpm_counter:cnt_rtl_0 ;
 +------------------------+-------------------+---------------------------------------+
 ; Parameter Name         ; Value             ; Type                                  ;
 +------------------------+-------------------+---------------------------------------+
@@ -224,57 +226,57 @@ Parallel compilation was disabled, but you have multiple processors available. E
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: test:inst|lpm_counter:count5_rtl_0 ;
-+------------------------+-------------------+----------------------------------------+
-; Parameter Name         ; Value             ; Type                                   ;
-+------------------------+-------------------+----------------------------------------+
-; AUTO_CARRY_CHAINS      ; ON                ; AUTO_CARRY                             ;
-; IGNORE_CARRY_BUFFERS   ; OFF               ; IGNORE_CARRY                           ;
-; AUTO_CASCADE_CHAINS    ; ON                ; AUTO_CASCADE                           ;
-; IGNORE_CASCADE_BUFFERS ; OFF               ; IGNORE_CASCADE                         ;
-; LPM_WIDTH              ; 4                 ; Untyped                                ;
-; LPM_DIRECTION          ; UP                ; Untyped                                ;
-; LPM_MODULUS            ; 0                 ; Untyped                                ;
-; LPM_AVALUE             ; UNUSED            ; Untyped                                ;
-; LPM_SVALUE             ; UNUSED            ; Untyped                                ;
-; LPM_PORT_UPDOWN        ; PORT_CONNECTIVITY ; Untyped                                ;
-; DEVICE_FAMILY          ; MAX7000S          ; Untyped                                ;
-; CARRY_CHAIN            ; MANUAL            ; Untyped                                ;
-; CARRY_CHAIN_LENGTH     ; 48                ; CARRY_CHAIN_LENGTH                     ;
-; NOT_GATE_PUSH_BACK     ; ON                ; NOT_GATE_PUSH_BACK                     ;
-; CARRY_CNT_EN           ; SMART             ; Untyped                                ;
-; LABWIDE_SCLR           ; ON                ; Untyped                                ;
-; USE_NEW_VERSION        ; TRUE              ; Untyped                                ;
-; CBXI_PARAMETER         ; NOTHING           ; Untyped                                ;
-+------------------------+-------------------+----------------------------------------+
++--------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: test:inst1|lpm_counter:count5_rtl_0 ;
++------------------------+-------------------+-----------------------------------------+
+; Parameter Name         ; Value             ; Type                                    ;
++------------------------+-------------------+-----------------------------------------+
+; AUTO_CARRY_CHAINS      ; ON                ; AUTO_CARRY                              ;
+; IGNORE_CARRY_BUFFERS   ; OFF               ; IGNORE_CARRY                            ;
+; AUTO_CASCADE_CHAINS    ; ON                ; AUTO_CASCADE                            ;
+; IGNORE_CASCADE_BUFFERS ; OFF               ; IGNORE_CASCADE                          ;
+; LPM_WIDTH              ; 4                 ; Untyped                                 ;
+; LPM_DIRECTION          ; UP                ; Untyped                                 ;
+; LPM_MODULUS            ; 0                 ; Untyped                                 ;
+; LPM_AVALUE             ; UNUSED            ; Untyped                                 ;
+; LPM_SVALUE             ; UNUSED            ; Untyped                                 ;
+; LPM_PORT_UPDOWN        ; PORT_CONNECTIVITY ; Untyped                                 ;
+; DEVICE_FAMILY          ; MAX7000S          ; Untyped                                 ;
+; CARRY_CHAIN            ; MANUAL            ; Untyped                                 ;
+; CARRY_CHAIN_LENGTH     ; 48                ; CARRY_CHAIN_LENGTH                      ;
+; NOT_GATE_PUSH_BACK     ; ON                ; NOT_GATE_PUSH_BACK                      ;
+; CARRY_CNT_EN           ; SMART             ; Untyped                                 ;
+; LABWIDE_SCLR           ; ON                ; Untyped                                 ;
+; USE_NEW_VERSION        ; TRUE              ; Untyped                                 ;
+; CBXI_PARAMETER         ; NOTHING           ; Untyped                                 ;
++------------------------+-------------------+-----------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: test:inst|lpm_counter:alarm5_rtl_0 ;
-+------------------------+-------------------+----------------------------------------+
-; Parameter Name         ; Value             ; Type                                   ;
-+------------------------+-------------------+----------------------------------------+
-; AUTO_CARRY_CHAINS      ; ON                ; AUTO_CARRY                             ;
-; IGNORE_CARRY_BUFFERS   ; OFF               ; IGNORE_CARRY                           ;
-; AUTO_CASCADE_CHAINS    ; ON                ; AUTO_CASCADE                           ;
-; IGNORE_CASCADE_BUFFERS ; OFF               ; IGNORE_CASCADE                         ;
-; LPM_WIDTH              ; 4                 ; Untyped                                ;
-; LPM_DIRECTION          ; UP                ; Untyped                                ;
-; LPM_MODULUS            ; 0                 ; Untyped                                ;
-; LPM_AVALUE             ; UNUSED            ; Untyped                                ;
-; LPM_SVALUE             ; UNUSED            ; Untyped                                ;
-; LPM_PORT_UPDOWN        ; PORT_CONNECTIVITY ; Untyped                                ;
-; DEVICE_FAMILY          ; MAX7000S          ; Untyped                                ;
-; CARRY_CHAIN            ; MANUAL            ; Untyped                                ;
-; CARRY_CHAIN_LENGTH     ; 48                ; CARRY_CHAIN_LENGTH                     ;
-; NOT_GATE_PUSH_BACK     ; ON                ; NOT_GATE_PUSH_BACK                     ;
-; CARRY_CNT_EN           ; SMART             ; Untyped                                ;
-; LABWIDE_SCLR           ; ON                ; Untyped                                ;
-; USE_NEW_VERSION        ; TRUE              ; Untyped                                ;
-; CBXI_PARAMETER         ; NOTHING           ; Untyped                                ;
-+------------------------+-------------------+----------------------------------------+
++--------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: test:inst1|lpm_counter:alarm5_rtl_0 ;
++------------------------+-------------------+-----------------------------------------+
+; Parameter Name         ; Value             ; Type                                    ;
++------------------------+-------------------+-----------------------------------------+
+; AUTO_CARRY_CHAINS      ; ON                ; AUTO_CARRY                              ;
+; IGNORE_CARRY_BUFFERS   ; OFF               ; IGNORE_CARRY                            ;
+; AUTO_CASCADE_CHAINS    ; ON                ; AUTO_CASCADE                            ;
+; IGNORE_CASCADE_BUFFERS ; OFF               ; IGNORE_CASCADE                          ;
+; LPM_WIDTH              ; 4                 ; Untyped                                 ;
+; LPM_DIRECTION          ; UP                ; Untyped                                 ;
+; LPM_MODULUS            ; 0                 ; Untyped                                 ;
+; LPM_AVALUE             ; UNUSED            ; Untyped                                 ;
+; LPM_SVALUE             ; UNUSED            ; Untyped                                 ;
+; LPM_PORT_UPDOWN        ; PORT_CONNECTIVITY ; Untyped                                 ;
+; DEVICE_FAMILY          ; MAX7000S          ; Untyped                                 ;
+; CARRY_CHAIN            ; MANUAL            ; Untyped                                 ;
+; CARRY_CHAIN_LENGTH     ; 48                ; CARRY_CHAIN_LENGTH                      ;
+; NOT_GATE_PUSH_BACK     ; ON                ; NOT_GATE_PUSH_BACK                      ;
+; CARRY_CNT_EN           ; SMART             ; Untyped                                 ;
+; LABWIDE_SCLR           ; ON                ; Untyped                                 ;
+; USE_NEW_VERSION        ; TRUE              ; Untyped                                 ;
+; CBXI_PARAMETER         ; NOTHING           ; Untyped                                 ;
++------------------------+-------------------+-----------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -284,7 +286,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Tue Sep 11 22:48:33 2018
+    Info: Processing started: Tue Sep 11 23:22:59 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off test -c test
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file chooseone.vhd
@@ -301,6 +303,9 @@ Info (12021): Found 2 design units, including 1 entities, in source file show.vh
 Info (12021): Found 2 design units, including 1 entities, in source file sound.vhd
     Info (12022): Found design unit 1: sound-listen
     Info (12023): Found entity 1: sound
+Info (12021): Found 2 design units, including 1 entities, in source file music.vhd
+    Info (12022): Found design unit 1: music-voice
+    Info (12023): Found entity 1: music
 Info (12127): Elaborating entity "Block1" for the top level hierarchy
 Warning (275083): Bus "ount2[3..0]" found using same base name as "ount", which might lead to a name conflict.
 Warning (275083): Bus "ount3[3..0]" found using same base name as "ount", which might lead to a name conflict.
@@ -318,23 +323,32 @@ Warning (275080): Converted elements in bus name "count2" using legacy naming ru
     Warning (275081): Converted element name(s) from "count2[3..0]" to "count23..0"
 Warning (275080): Converted elements in bus name "count3" using legacy naming rules. Make any assignments on the new names, not on the original names.
     Warning (275081): Converted element name(s) from "count3[3..0]" to "count33..0"
-Info (12128): Elaborating entity "sound" for hierarchy "sound:inst6"
+Warning (275083): Bus "count2[3..0]" found using same base name as "count", which might lead to a name conflict.
+Warning (275083): Bus "count3[3..0]" found using same base name as "count", which might lead to a name conflict.
+Warning (275080): Converted elements in bus name "count" using legacy naming rules. Make any assignments on the new names, not on the original names.
+    Warning (275081): Converted element name(s) from "count[3..0]" to "count3..0"
+Warning (275080): Converted elements in bus name "count2" using legacy naming rules. Make any assignments on the new names, not on the original names.
+    Warning (275081): Converted element name(s) from "count2[3..0]" to "count23..0"
+Warning (275080): Converted elements in bus name "count3" using legacy naming rules. Make any assignments on the new names, not on the original names.
+    Warning (275081): Converted element name(s) from "count3[3..0]" to "count33..0"
+Info (12128): Elaborating entity "sound" for hierarchy "sound:inst3"
 Warning (10492): VHDL Process Statement warning at sound.vhd(18): signal "freqout" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Info (12128): Elaborating entity "test" for hierarchy "test:inst"
-Warning (10492): VHDL Process Statement warning at test.vhd(160): signal "freq" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Info (12128): Elaborating entity "chooseone" for hierarchy "chooseone:inst4"
-Info (12128): Elaborating entity "show" for hierarchy "show:inst5"
+Info (12128): Elaborating entity "music" for hierarchy "music:inst6"
+Warning (10492): VHDL Process Statement warning at music.vhd(63): signal "freq" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "test" for hierarchy "test:inst1"
+Info (12128): Elaborating entity "chooseone" for hierarchy "chooseone:inst"
+Info (12128): Elaborating entity "show" for hierarchy "show:inst4"
 Info (19000): Inferred 3 megafunctions from design logic
-    Info (19001): Inferred lpm_counter megafunction (LPM_WIDTH=8) from the following logic: "sound:inst6|cnt_rtl_0"
-    Info (19001): Inferred lpm_counter megafunction (LPM_WIDTH=4) from the following logic: "test:inst|count5_rtl_0"
-    Info (19001): Inferred lpm_counter megafunction (LPM_WIDTH=4) from the following logic: "test:inst|alarm5_rtl_0"
-Info (12130): Elaborated megafunction instantiation "sound:inst6|lpm_counter:cnt_rtl_0"
-Info (12133): Instantiated megafunction "sound:inst6|lpm_counter:cnt_rtl_0" with the following parameter:
+    Info (19001): Inferred lpm_counter megafunction (LPM_WIDTH=8) from the following logic: "sound:inst3|cnt_rtl_0"
+    Info (19001): Inferred lpm_counter megafunction (LPM_WIDTH=4) from the following logic: "test:inst1|count5_rtl_0"
+    Info (19001): Inferred lpm_counter megafunction (LPM_WIDTH=4) from the following logic: "test:inst1|alarm5_rtl_0"
+Info (12130): Elaborated megafunction instantiation "sound:inst3|lpm_counter:cnt_rtl_0"
+Info (12133): Instantiated megafunction "sound:inst3|lpm_counter:cnt_rtl_0" with the following parameter:
     Info (12134): Parameter "LPM_WIDTH" = "8"
     Info (12134): Parameter "LPM_DIRECTION" = "UP"
     Info (12134): Parameter "LPM_TYPE" = "LPM_COUNTER"
-Info (12130): Elaborated megafunction instantiation "test:inst|lpm_counter:count5_rtl_0"
-Info (12133): Instantiated megafunction "test:inst|lpm_counter:count5_rtl_0" with the following parameter:
+Info (12130): Elaborated megafunction instantiation "test:inst1|lpm_counter:count5_rtl_0"
+Info (12133): Instantiated megafunction "test:inst1|lpm_counter:count5_rtl_0" with the following parameter:
     Info (12134): Parameter "LPM_WIDTH" = "4"
     Info (12134): Parameter "LPM_DIRECTION" = "UP"
     Info (12134): Parameter "LPM_TYPE" = "LPM_COUNTER"
@@ -344,9 +358,9 @@ Info (21057): Implemented 188 device resources after synthesis - the final resou
     Info (21059): Implemented 28 output pins
     Info (21063): Implemented 114 macrocells
     Info (21073): Implemented 40 shareable expanders
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 19 warnings
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 27 warnings
     Info: Peak virtual memory: 548 megabytes
-    Info: Processing ended: Tue Sep 11 22:48:37 2018
+    Info: Processing ended: Tue Sep 11 23:23:03 2018
     Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:04
 

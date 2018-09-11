@@ -7,7 +7,6 @@ entity test is
 		k: in std_logic_vector(2 downto 0);
 		pulse:in std_logic;--pulse
 		lcx:in std_logic;
-		req:out std_logic_vector(7 downto 0);
 		ount:out std_logic_vector(3 downto 0);
       ount2:out std_logic_vector(3 downto 0);
       ount3:out std_logic_vector(3 downto 0);
@@ -24,8 +23,6 @@ entity test is
 end test;
 
 architecture tube of test is
-signal freq:std_logic_vector(7 downto 0);
-signal counter:std_logic_vector(3 downto 0);--14 conditions
 signal count:std_logic_vector(3 downto 0):="0000";
 signal count2:std_logic_vector(3 downto 0):="0000";
 signal count3:std_logic_vector(3 downto 0):="0000";
@@ -157,48 +154,7 @@ begin
       larm4<=alarm4;
       larm5<=alarm5;
       larm6<=alarm6;
-		req<=freq;
 		end process givedata;
 	
-		music: process(clk, count,count2,count3,count4,count5,count6,alarm1,alarm2,alarm3,alarm4,alarm5,alarm6)
-		--constant do:std_logic_vector(7 downto 0):="11000011";--do��Ƶ��256Hz,
-		--constant so:std_logic_vector(7 downto 0):="10000010";--so��Ƶ��384Hz������ͬ��
-		--constant la:std_logic_vector(7 downto 0):="01110101";--la��Ƶ��426Hz������ͬ��
-		--constant stop:std_logic_vector(7 downto 0):="00000000";--stop��Ƶ��494Hz������ͬ��
-		variable sign:std_logic:='0';
-		begin 
-			if(count4 & count3 & count2 & count= "0000000000000000") then 
-			sign:='1';
-			elsif(count=alarm1 and count2=alarm2 and count3=alarm3 and count4=alarm4 and count5=alarm5 and count6=alarm6) then
-			sign:='1';
-			elsif(clk' event and clk = '1' and sign='1') then
-				if counter="0000" then
-					freq<="11000011";
-					counter<=counter+1;
-				elsif counter="0001" then
-					freq<="11000011";
-					counter<=counter+1;
-				elsif counter="0010" then
-					freq<="10000010";
-					counter<=counter+1;
-				elsif counter="0011" then
-					freq<="10000010";
-					counter<=counter+1;
-				elsif counter="0100" then
-					freq<="01110101";
-					counter<=counter+1;
-				elsif counter="0101" then
-					freq<="01110101";
-					counter<=counter+1;
-				elsif counter="0110" then
-					freq<="10000010";
-					counter<=counter+1;
-				elsif counter="0111" then
-					freq<="00000000";
-					sign:='0';
-					counter<="0000";
-				end if;
-			end if;
-		end process music;
 		
 end tube;
