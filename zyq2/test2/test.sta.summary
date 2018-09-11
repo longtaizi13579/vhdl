@@ -3,35 +3,71 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Setup 'clk'
-Slack : -38.000
-TNS   : -1344.500
+Slack : -38.500
+TNS   : -1502.500
 
 Type  : Setup 'clk100k'
 Slack : -28.000
-TNS   : -244.000
+TNS   : -186.000
+
+Type  : Setup 'k[0]'
+Slack : -20.500
+TNS   : -656.000
+
+Type  : Setup 'k[1]'
+Slack : -20.500
+TNS   : -656.000
+
+Type  : Setup 'k[2]'
+Slack : -20.500
+TNS   : -656.000
 
 Type  : Hold 'clk'
-Slack : 5.000
-TNS   : 0.000
+Slack : -12.000
+TNS   : -676.000
+
+Type  : Hold 'k[0]'
+Slack : -12.000
+TNS   : -576.000
+
+Type  : Hold 'k[1]'
+Slack : -12.000
+TNS   : -576.000
+
+Type  : Hold 'k[2]'
+Slack : -12.000
+TNS   : -576.000
 
 Type  : Hold 'clk100k'
 Slack : 5.000
 TNS   : 0.000
 
 Type  : Recovery 'clk'
-Slack : -34.000
-TNS   : -34.000
+Slack : -50.500
+TNS   : -50.500
 
 Type  : Removal 'clk'
-Slack : 27.000
+Slack : 34.000
 TNS   : 0.000
+
+Type  : Minimum Pulse Width 'k[0]'
+Slack : -5.500
+TNS   : -1056.000
+
+Type  : Minimum Pulse Width 'k[1]'
+Slack : -5.500
+TNS   : -1056.000
+
+Type  : Minimum Pulse Width 'k[2]'
+Slack : -5.500
+TNS   : -1056.000
 
 Type  : Minimum Pulse Width 'clk'
 Slack : -5.500
-TNS   : -660.000
+TNS   : -924.000
 
 Type  : Minimum Pulse Width 'clk100k'
-Slack : -4.500
-TNS   : -81.000
+Slack : -5.500
+TNS   : -99.000
 
 ------------------------------------------------------------

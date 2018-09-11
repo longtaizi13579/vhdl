@@ -4,42 +4,27 @@ USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity test is
 	port( clk:in std_logic;
-		clk100k:in std_logic;
 		k: in std_logic_vector(2 downto 0);
 		pulse:in std_logic;--pulse
 		lcx:in std_logic;
-		final:out std_logic;--Ƶ������
-		l1:out std_logic_vector(7 downto 1);
-		l2:out std_logic_vector(3 downto 0);
-		l3:out std_logic_vector(3 downto 0);
-		l4:out std_logic_vector(3 downto 0);
-		l5:out std_logic_vector(3 downto 0);
-		l6:out std_logic_vector(3 downto 0)
+		req:out std_logic_vector(7 downto 0);
+		ount:out std_logic_vector(3 downto 0);
+      ount2:out std_logic_vector(3 downto 0);
+      ount3:out std_logic_vector(3 downto 0);
+		ount4:out std_logic_vector(3 downto 0);
+      ount5:out std_logic_vector(3 downto 0);
+      ount6:out std_logic_vector(3 downto 0);
+      larm1:out std_logic_vector(3 downto 0);
+      larm2:out std_logic_vector(3 downto 0);
+      larm3:out std_logic_vector(3 downto 0);
+      larm4:out std_logic_vector(3 downto 0);
+      larm5:out std_logic_vector(3 downto 0);
+      larm6:out std_logic_vector(3 downto 0)
 	);
-	function leddecoder(in_data: std_logic_vector) return std_logic_vector is
-	variable out_data: std_logic_vector(6 downto 0);
-	begin
-		case in_data is
-			when "0000" => out_data := "1111110";
-			when "0001" => out_data := "0110000";
-			when "0010" => out_data := "1101101";
-			when "0011" => out_data := "1111001";
-			when "0100" => out_data := "0110011";
-			when "0101" => out_data := "1011011";
-			when "0110" => out_data := "0011111";
-			when "0111" => out_data := "1110000";
-			when "1000" => out_data := "1111111";
-			when "1001" => out_data := "1110011";
-			when others => NULL;
-		end case;
-		return out_data;
-	end leddecoder;
 end test;
 
 architecture tube of test is
-signal freqout:std_logic;
 signal freq:std_logic_vector(7 downto 0);
-signal cnt:std_logic_vector(7 downto 0);
 signal counter:std_logic_vector(3 downto 0);--14 conditions
 signal count:std_logic_vector(3 downto 0):="0000";
 signal count2:std_logic_vector(3 downto 0):="0000";
@@ -47,7 +32,6 @@ signal count3:std_logic_vector(3 downto 0):="0000";
 signal count4:std_logic_vector(3 downto 0):="0000";
 signal count5:std_logic_vector(3 downto 0):="0000";
 signal count6:std_logic_vector(3 downto 0):="0000";
-signal countmem:std_logic;
 signal alarm1:std_logic_vector(3 downto 0):="0000";
 signal alarm2:std_logic_vector(3 downto 0):="0000";
 signal alarm3:std_logic_vector(3 downto 0):="0000";
@@ -159,69 +143,24 @@ begin
 		end if;
 		end process p1;
 		
-		
-		showtime:process(clk, count, count2, count3, count4, count5, count6, k)
+		givedata:process(count,count2,count3,count4,count5,count6,alarm1,alarm2,alarm3,alarm4,alarm5,alarm6)
 		begin
-			--if(k="000" or k="001" or k="010" or k="011") then
-			if(clk'event and clk='0') then
-			if(k(2)='0') then
-			if (countmem='0')then
-				l1 <= leddecoder(count);
-				l2 <= count2; l3 <= count3;
-				l4 <= count4; l5 <= count5; l6 <= count6;
-				case k(1 downto 0) is	
-					when "00" => NULL;
-					when "01" => l5 <= "1111"; l6 <= "1111";
-					when "10" => l4 <= "1111"; l3 <= "1111";
-					when "11" => l2 <= "1111"; l1 <= "0000000";
-				end case;
-				countmem<='1';
-			elsif(countmem='1') then
-				l1 <= leddecoder(count);
-				l2 <= count2; l3 <= count3;
-				l4 <= count4; l5 <= count5; l6 <= count6;
-				countmem<='0';
-			end if;
-			else
-			if (countmem='0')then
-				l1 <= leddecoder(alarm1);
-				l2 <= alarm2; l3 <= alarm3;
-				l4 <= alarm4; l5 <= alarm5; l6 <= alarm6;
-				case k(1 downto 0) is	
-					when "00" => NULL;
-					when "01" => l5 <= "1111"; l6 <= "1111";
-					when "10" => l4 <= "1111"; l3 <= "1111";
-					when "11" => l2 <= "1111"; l1 <= "0000000";
-				end case;
-				countmem<='1';
-			elsif(countmem='1') then
-				l1 <= leddecoder(alarm1);
-				l2 <= alarm2; l3 <= alarm3;
-				l4 <= alarm4; l5 <= alarm5; l6 <= alarm6;
-				countmem<='0';
-			end if;
-		end if;
-		end if;
-		end process showtime;
-		
-		sound: process(clk100k)
-		begin
-		final <= freqout;
-			if rising_edge(clk100k) then
-				if freq = "00000000" then--û������������
-					freqout <= '0';--����������������������
-				else
-					if cnt = freq then--������
-						cnt <= "00000000";
-						freqout <= not freqout;--����ȡ��<=>�����
-					else
-							cnt <= cnt + 1;
-					end if;
-				end if;
-			end if;
-		end process sound;
+		ount<=count;
+      ount2<=count2;
+      ount3<=count3;
+		ount4<=count4;
+      ount5<=count5;
+      ount6<=count6;
+      larm1<=alarm1;
+      larm2<=alarm2;
+      larm3<=alarm3;
+      larm4<=alarm4;
+      larm5<=alarm5;
+      larm6<=alarm6;
+		req<=freq;
+		end process givedata;
 	
-		music: process(clk, count, count2)
+		music: process(clk, count,count2,count3,count4,count5,count6,alarm1,alarm2,alarm3,alarm4,alarm5,alarm6)
 		--constant do:std_logic_vector(7 downto 0):="11000011";--do��Ƶ��256Hz,
 		--constant so:std_logic_vector(7 downto 0):="10000010";--so��Ƶ��384Hz������ͬ��
 		--constant la:std_logic_vector(7 downto 0):="01110101";--la��Ƶ��426Hz������ͬ��
