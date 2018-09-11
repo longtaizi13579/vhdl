@@ -1,0 +1,117 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Setup 'setting:inst|clk1'
+Slack : -77.000
+TNS   : -2017.000
+
+Type  : Setup '1HZ'
+Slack : -48.000
+TNS   : -193.500
+
+Type  : Setup 'setting:inst|state[0]'
+Slack : -32.000
+TNS   : -640.000
+
+Type  : Setup 'setting:inst|state[1]'
+Slack : -32.000
+TNS   : -640.000
+
+Type  : Setup 'setting:inst|state[2]'
+Slack : -32.000
+TNS   : -640.000
+
+Type  : Setup 'QD'
+Slack : -30.000
+TNS   : -600.000
+
+Type  : Setup '100KHZ'
+Slack : -22.000
+TNS   : -185.000
+
+Type  : Setup 'clear'
+Slack : -12.000
+TNS   : -240.000
+
+Type  : Hold 'clear'
+Slack : -15.000
+TNS   : -300.000
+
+Type  : Hold '1HZ'
+Slack : -6.000
+TNS   : -6.000
+
+Type  : Hold 'QD'
+Slack : 3.000
+TNS   : 0.000
+
+Type  : Hold '100KHZ'
+Slack : 5.000
+TNS   : 0.000
+
+Type  : Hold 'setting:inst|clk1'
+Slack : 5.000
+TNS   : 0.000
+
+Type  : Hold 'setting:inst|state[0]'
+Slack : 5.000
+TNS   : 0.000
+
+Type  : Hold 'setting:inst|state[1]'
+Slack : 5.000
+TNS   : 0.000
+
+Type  : Hold 'setting:inst|state[2]'
+Slack : 5.000
+TNS   : 0.000
+
+Type  : Recovery 'setting:inst|clk1'
+Slack : -54.000
+TNS   : -1512.000
+
+Type  : Recovery 'clear'
+Slack : -7.000
+TNS   : -7.000
+
+Type  : Removal 'clear'
+Slack : -27.000
+TNS   : -27.000
+
+Type  : Removal 'setting:inst|clk1'
+Slack : 20.000
+TNS   : 0.000
+
+Type  : Minimum Pulse Width 'clear'
+Slack : -32.500
+TNS   : -460.000
+
+Type  : Minimum Pulse Width 'setting:inst|clk1'
+Slack : -5.500
+TNS   : -319.000
+
+Type  : Minimum Pulse Width 'QD'
+Slack : -5.500
+TNS   : -220.000
+
+Type  : Minimum Pulse Width 'setting:inst|state[0]'
+Slack : -5.500
+TNS   : -220.000
+
+Type  : Minimum Pulse Width 'setting:inst|state[1]'
+Slack : -5.500
+TNS   : -220.000
+
+Type  : Minimum Pulse Width 'setting:inst|state[2]'
+Slack : -5.500
+TNS   : -220.000
+
+Type  : Minimum Pulse Width '100KHZ'
+Slack : -5.500
+TNS   : -132.000
+
+Type  : Minimum Pulse Width '1HZ'
+Slack : -5.500
+TNS   : -55.000
+
+------------------------------------------------------------

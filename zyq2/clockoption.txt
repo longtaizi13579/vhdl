@@ -1,0 +1,206 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+entity test is
+port(clk:in std_logic;
+a:in std_logic;--change clock tube selection/1 is choose
+b:in std_logic;--select enable
+c:in std_logic;--use pulse to set clock 
+l1:out std_logic_vector(7 downto 1);
+l2:out std_logic_vector(3 downto 0);
+l3:out std_logic_vector(3 downto 0);
+l4:out std_logic_vector(3 downto 0);
+l5:out std_logic_vector(3 downto 0);
+l6:out std_logic_vector(3 downto 0)
+);
+end test;
+
+architecture tube of test is
+
+signal count:std_logic_vector(3 downto 0):="0000";
+signal count2:std_logic_vector(3 downto 0):="0000";
+signal count3:std_logic_vector(3 downto 0):="0000";
+signal count4:std_logic_vector(3 downto 0):="0000";
+signal count5:std_logic_vector(3 downto 0):="0000";
+signal count6:std_logic_vector(3 downto 0):="0000";
+signal countnum:integer;
+Type countarray is array(5 downto 0)of std_logic_vector(3 downto 0);
+signal sign_countarray:countarray:=(count,count2,count3,count4,count5,count6);
+begin
+p1:process(clk,a,b,c)
+begin
+if(b='1') then
+	if(a='1') then
+		if(rising_edge(c)) then
+			sign_countarray(countnum)<=sign_countarray(countnum)+'1';
+		end if;
+	else
+		if(rising_edge(c)) then
+			countnum<=countnum+1;
+			if(countnum=6) then
+			countnum<=0;
+			end if;
+		end if;		
+	end if;	
+else 
+if(clk'event and clk='1')then
+	if(count="1001")then
+	count<="0000";
+	if(count2="0101")then
+	count2<="0000";
+		if(count3="1001")then 
+		count3<="0000";
+			if(count4="0101")then
+			count4<="0000";
+				if(count5="1001")then 
+					count5<="0000";
+					count6<=count6+1;
+				elsif(count5="0011" and count6="0010") then
+					count5<="0000";
+					count6<="0000";
+				else
+					count5<=count5+1;
+				end if;
+			else
+			count4<=count4+1;
+			end if;
+		else
+		count3<=count3+1;
+		end if;
+	else
+	count2<=count2+1;
+	end if;
+	else
+	count<=count+'1';
+	end if;
+end if;
+end if;
+end process p1;
+--p2 p3 are second
+p2:process(count)
+begin
+if(count="0000")then 
+	l1<="1111110";
+elsif(count="0001")then 
+	l1<="0110000";
+elsif(count="0010")then
+	l1<="1101101";
+elsif(count="0011")then
+		l1<="1111001";
+elsif(count="0100")then
+l1<="0110011";
+elsif(count="0101")then
+l1<="1011011";
+elsif(count="0110")then
+l1<="1011111";
+elsif(count="0111")then
+l1<="1110000";
+elsif(count="1000")then
+l1<="1111111";
+elsif(count="1001")then
+l1<="1111011";
+end if;
+end process p2;
+
+p3:process(count2)
+begin
+if(count2="0000")then 
+	l2<="0000";
+elsif(count2="0001")then 
+	l2<="0001";
+elsif(count2="0010")then
+	l2<="0010";
+elsif(count2="0011")then
+		l2<="0011";
+elsif(count2="0100")then
+l2<="0100";
+elsif(count2="0101")then
+l2<="0101";
+end if;
+end process p3;
+--p4 p5 are minute
+p4:process(count3)
+begin
+if(count3="0000")then 
+	l3<="0000";
+elsif(count3="0001")then 
+	l3<="0001";
+elsif(count3="0010")then
+	l3<="0010";
+elsif(count3="0011")then
+		l3<="0011";
+elsif(count3="0100")then
+l3<="0100";
+elsif(count3="0101")then
+l3<="0101";
+elsif(count3="0110")then
+l3<="0110";
+elsif(count3="0111")then
+l3<="0111";
+elsif(count3="1000")then
+l3<="1000";
+elsif(count3="1001")then
+l3<="1001";
+end if;
+end process p4;
+
+p5:process(count4)
+begin
+if(count4="0000")then 
+	l4<="0000";
+elsif(count4="0001")then 
+	l4<="0001";
+elsif(count4="0010")then
+	l4<="0010";
+elsif(count4="0011")then
+		l4<="0011";
+elsif(count4="0100")then
+l4<="0100";
+elsif(count4="0101")then
+l4<="0101";
+end if;
+end process p5;
+--p6 p7 are hour
+p6:process(count5)
+begin
+if(count5="0000")then 
+	l5<="0000";
+elsif(count5="0001")then 
+	l5<="0001";
+elsif(count5="0010")then
+	l5<="0010";
+elsif(count5="0011")then
+		l5<="0011";
+elsif(count5="0100")then
+l5<="0100";
+elsif(count5="0101")then
+l5<="0101";
+elsif(count5="0110")then
+l5<="0110";
+elsif(count5="0111")then
+l5<="0111";
+elsif(count5="1000")then
+l5<="1000";
+elsif(count5="1001")then
+l5<="1001";
+end if;
+end process p6;
+
+p7:process(count6)
+begin
+if(count6="0000")then 
+	l6<="0000";
+elsif(count6="0001")then 
+	l6<="0001";
+elsif(count6="0010")then
+	l6<="0010";
+elsif(count6="0011")then
+		l6<="0011";
+elsif(count6="0100")then
+l6<="0100";
+elsif(count6="0101")then
+l6<="0101";
+end if;
+end process p7;
+end tube;

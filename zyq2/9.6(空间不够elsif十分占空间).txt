@@ -1,0 +1,204 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+entity test is
+	port( clk:in std_logic;
+	clk100k:in std_logic;
+		k: in std_logic_vector(1 downto 0);
+		pulse:in std_logic;--pulse
+		final:out std_logic;--频率输出
+		l1:out std_logic_vector(7 downto 1);
+		l2:out std_logic_vector(3 downto 0);
+		l3:out std_logic_vector(3 downto 0);
+		l4:out std_logic_vector(3 downto 0);
+		l5:out std_logic_vector(3 downto 0);
+		l6:out std_logic_vector(3 downto 0)
+	);
+	function leddecoder(in_data: std_logic_vector) return std_logic_vector is
+	variable out_data: std_logic_vector(6 downto 0);
+	begin
+		case in_data is
+			when "0000" => out_data := "1111110";
+			when "0001" => out_data := "0110000";
+			when "0010" => out_data := "1101101";
+			when "0011" => out_data := "1111001";
+			when "0100" => out_data := "0110011";
+			when "0101" => out_data := "1011011";
+			when "0110" => out_data := "1011111";
+			when "0111" => out_data := "1110000";
+			when "1000" => out_data := "1111111";
+			when "1001" => out_data := "1111011";
+			when others => NULL;
+		end case;
+		return out_data;
+	end leddecoder;
+end test;
+
+architecture tube of test is
+signal freqout:std_logic;
+signal freq:std_logic_vector(7 downto 0);
+signal cnt:std_logic_vector(7 downto 0);
+signal counter:std_logic_vector(3 downto 0);--14 conditions
+signal count:std_logic_vector(3 downto 0):="0000";
+signal count2:std_logic_vector(3 downto 0):="0000";
+signal count3:std_logic_vector(3 downto 0):="0000";
+signal count4:std_logic_vector(3 downto 0):="0000";
+signal count5:std_logic_vector(3 downto 0):="0000";
+signal count6:std_logic_vector(3 downto 0):="0000";
+signal countmem:std_logic;
+begin
+		p1:process(clk,k,pulse) ---count time and option time
+		begin
+		if(k="00") then
+		if(clk'event and clk='1')then
+			if(count="1001")then
+			count<="0000";
+			if(count2="0101")then
+			count2<="0000";
+				if(count3="1001")then
+				count3<="0000";
+					if(count4="0101")then
+					count4<="0000";
+						if(count5="1001")then 
+							count5<="0000";
+							count6<=count6+1;
+						elsif(count5="0011" and count6="0010") then
+							count5<="0000";
+							count6<="0000";
+						else
+							count5<=count5+1;
+						end if;
+					else
+					count4<=count4+1;
+					end if;
+				else
+				count3<=count3+1;
+				end if;
+			else
+			count2<=count2+1;
+			end if;
+			else
+			count<=count+'1';
+			end if;
+		end if;
+		elsif(k="01") then
+			if(rising_edge(pulse)) then
+				if(count5="1001")then 
+					count5<="0000";
+					count6<=count6+1;
+				elsif(count5="0011" and count6="0010") then
+					count5<="0000";
+					count6<="0000";
+				else
+					count5<=count5+1;
+				end if;
+			end if;
+		elsif(k="10") then
+			if(rising_edge(pulse)) then
+			if(count3="1001")then
+				count3<="0000";
+				if(count4="0101")then
+					count4<="0000";
+				else
+					count4<=count4+1;
+				end if;
+			else
+				count3<=count3+1;
+			end if;
+			end if;
+		elsif(k="11") then
+		if(rising_edge(pulse)) then
+			if(count="1001")then
+				count<="0000";
+				if(count2="0101")then
+					count2<="0000";
+				else
+					count2<=count2+1;
+				end if;
+			else
+				count<=count+1;
+			end if;
+		end if;
+		end if;
+		end process p1;
+		
+		
+		showtime:process(clk, count, count2, count3, count4, count5, count6, k)
+		begin
+			if (countmem='0' and (clk'event and clk='0'))then
+				l1 <= leddecoder(count);
+				l2 <= count2; l3 <= count3;
+				l4 <= count4; l5 <= count5; l6 <= count6;
+				case k is	
+					when "00" => NULL;
+					when "01" => l5 <= "1111"; l6 <= "1111";
+					when "10" => l4 <= "1111"; l3 <= "1111";
+					when "11" => l2 <= "1111"; l1 <= "0000000";
+				end case;
+				countmem<='1';
+			elsif(countmem='1'and (clk'event and clk='0')) then
+				l1 <= leddecoder(count);
+				l2 <= count2; l3 <= count3;
+				l4 <= count4; l5 <= count5; l6 <= count6;
+				countmem<='0';
+			end if;
+		end process showtime;
+		
+		sound: process(clk100k)
+		begin
+		final <= freqout;
+			if rising_edge(clk100k) then
+				if freq = "00000000" then--没有输入则不响
+					freqout <= '0';--假设输出低则蜂鸣器不响
+				else
+					if cnt = freq then--计数器
+						cnt <= "00000000";
+						freqout <= not freqout;--输出取反<=>输出方波
+					else
+							cnt <= cnt + 1;
+					end if;
+				end if;
+			end if;
+		end process sound;
+	
+		music: process(clk, count, count2)
+		--constant do:std_logic_vector(7 downto 0):="11000011";--do的频率256Hz,
+		--constant so:std_logic_vector(7 downto 0):="10000010";--so的频率384Hz，计算同上
+		--constant la:std_logic_vector(7 downto 0):="01110101";--la的频率426Hz，计算同上
+		--constant stop:std_logic_vector(7 downto 0):="00000000";--stop的频率494Hz，计算同上
+		variable sign:std_logic:='0';
+		begin 
+			if(count2 & count = "00000000") then 
+			sign:='1';
+			elsif(clk' event and clk = '1' and sign='1') then
+				if counter="0000" then
+					freq<="11000011";
+					counter<=counter+1;
+				elsif counter="0001" then
+					freq<="11000011";
+					counter<=counter+1;
+				elsif counter="0010" then
+					freq<="10000010";
+					counter<=counter+1;
+				elsif counter="0011" then
+					freq<="10000010";
+					counter<=counter+1;
+				elsif counter="0100" then
+					freq<="01110101";
+					counter<=counter+1;
+				elsif counter="0101" then
+					freq<="01110101";
+					counter<=counter+1;
+				elsif counter="0110" then
+					freq<="10000010";
+					counter<=counter+1;
+				elsif counter="0111" then
+					freq<="00000000";
+					sign:='0';
+					counter<="0000";
+				end if;
+			end if;
+		end process music;
+		
+end tube;

@@ -1,0 +1,57 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+use ieee.std_logic_arith.all;
+entity voice is port
+(
+clk:in std_logic;--主频 可设置10k
+rst:in std_logic;--复位信号 低有效
+selectin:in std_logic_vector(6 downto 0);--频率选择输入，因为只有一个输出，所以必须得有选择
+final:out std_logic--频率输出
+);
+end entity;
+architecture behav of voice is
+signal freqout:std_logic;
+signal freq:std_logic_vector(7 downto 0);
+signal cnt:std_logic_vector(7 downto 0);
+constant do:std_logic_vector(7 downto 0):="11000011";--do的频率256Hz,
+constant re:std_logic_vector(7 downto 0):="10101110";--re的频率288Hz，计算同上
+constant mi:std_logic_vector(7 downto 0):="10011100";--mi的频率320Hz，计算同上
+constant fa:std_logic_vector(7 downto 0):="10010010";--fa的频率342Hz，计算同上
+constant so:std_logic_vector(7 downto 0):="10000010";--so的频率384Hz，计算同上
+constant la:std_logic_vector(7 downto 0):="01110101";--la的频率426Hz，计算同上
+constant xi:std_logic_vector(7 downto 0):="01100101";--xi的频率494Hz，计算同上
+begin
+final <= freqout;
+process(clk,rst)
+begin
+if rst = '1' then
+if rising_edge(clk) then
+case selectin is
+when "0000001" => freq <= do;
+when "0000010" => freq <= re;
+when "0000100" => freq <= mi;
+when "0001000" => freq <= fa;
+when "0010000" => freq <= so;
+when "0100000" => freq <= la;
+when "1000000" => freq <= xi;
+when others => freq <= "00000000";
+end case;
+if freq = "00000000" then--没有输入则不响
+freqout <= '0';--假设输出低则蜂鸣器不响
+else
+if cnt = freq then--计数器
+cnt <= "00000000";
+freqout <= not freqout;--输出取反<=>输出方波
+else
+cnt <= cnt + 1;
+end if;
+end if;
+end if;
+else --复位信号有效时
+freqout <= '0';
+freq <= "00000000";
+cnt <= "00000000";
+end if;
+end process;
+end architecture;

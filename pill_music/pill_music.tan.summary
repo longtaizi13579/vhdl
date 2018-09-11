@@ -1,0 +1,136 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 40.000 ns
+From           : start
+To             : setting:inst|pil_per_bot_l[3]
+From Clock     : --
+To Clock       : 1HZ
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 97.000 ns
+From           : setting:inst|set_pil_per_bot_h[3]
+To             : green
+From Clock     : 100KHZ
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case tpd
+Slack          : N/A
+Required Time  : None
+Actual Time    : 52.000 ns
+From           : clear
+To             : green
+From Clock     : --
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : 4.000 ns
+From           : state_input[0]
+To             : setting:inst|state[0]
+From Clock     : --
+To Clock       : 100KHZ
+Failed Paths   : 0
+
+Type           : Clock Setup: '1HZ'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 20.00 MHz ( period = 50.000 ns )
+From           : setting:inst|lpm_counter:total_pill_h_rtl_0|dffs[1]
+To             : setting:inst|pil_per_bot_l[3]
+From Clock     : 1HZ
+To Clock       : 1HZ
+Failed Paths   : 0
+
+Type           : Clock Setup: 'QD'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 25.00 MHz ( period = 40.000 ns )
+From           : setting:inst|set_pil_per_bot_l[3]
+To             : setting:inst|set_pil_per_bot_l[3]
+From Clock     : QD
+To Clock       : QD
+Failed Paths   : 0
+
+Type           : Clock Setup: '100KHZ'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 25.00 MHz ( period = 40.000 ns )
+From           : setting:inst|set_pil_per_bot_l[3]
+To             : setting:inst|set_pil_per_bot_l[3]
+From Clock     : 100KHZ
+To Clock       : 100KHZ
+Failed Paths   : 0
+
+Type           : Clock Setup: 'start'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 45.45 MHz ( period = 22.000 ns )
+From           : setting:inst|set_pil_per_bot_l[3]
+To             : setting:inst|set_pil_per_bot_l[3]
+From Clock     : start
+To Clock       : start
+Failed Paths   : 0
+
+Type           : Clock Setup: 'clear'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 76.92 MHz ( period = 13.000 ns )
+From           : setting:inst|set_pil_per_bot_l[3]
+To             : setting:inst|set_pil_per_bot_l[3]
+From Clock     : clear
+To Clock       : clear
+Failed Paths   : 0
+
+Type           : Clock Hold: '100KHZ'
+Slack          : Not operational: Clock Skew > Data Delay
+Required Time  : None
+Actual Time    : N/A
+From           : setting:inst|set_pil_per_bot_h[2]
+To             : setting:inst|set_pil_per_bot_h[2]
+From Clock     : 100KHZ
+To Clock       : 100KHZ
+Failed Paths   : 60
+
+Type           : Clock Hold: 'QD'
+Slack          : Not operational: Clock Skew > Data Delay
+Required Time  : None
+Actual Time    : N/A
+From           : setting:inst|set_pil_per_bot_h[2]
+To             : setting:inst|set_pil_per_bot_h[2]
+From Clock     : QD
+To Clock       : QD
+Failed Paths   : 60
+
+Type           : Clock Hold: 'start'
+Slack          : Not operational: Clock Skew > Data Delay
+Required Time  : None
+Actual Time    : N/A
+From           : setting:inst|set_pil_per_bot_h[2]
+To             : setting:inst|set_pil_per_bot_h[2]
+From Clock     : start
+To Clock       : start
+Failed Paths   : 60
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 180
+
+--------------------------------------------------------------------------------------
+

@@ -1,0 +1,96 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+use ieee.std_logic_arith.all;
+entity voice is port
+(
+clk:in std_logic;--主频 可设置10k
+clk1:in std_logic;
+rst:in std_logic;--复位信号 低有效
+final:out std_logic--频率输出
+);
+end entity;
+architecture behav of voice is
+signal freqout:std_logic;
+signal freq:std_logic_vector(7 downto 0);
+signal cnt:std_logic_vector(7 downto 0);
+signal count:std_logic_vector(3 downto 0);--14 conditions
+constant do:std_logic_vector(7 downto 0):="11000011";--do的频率256Hz,
+constant re:std_logic_vector(7 downto 0):="10101110";--re的频率288Hz，计算同上
+constant mi:std_logic_vector(7 downto 0):="10011100";--mi的频率320Hz，计算同上
+constant fa:std_logic_vector(7 downto 0):="10010010";--fa的频率342Hz，计算同上
+constant so:std_logic_vector(7 downto 0):="10000010";--so的频率384Hz，计算同上
+constant la:std_logic_vector(7 downto 0):="01110101";--la的频率426Hz，计算同上
+constant xi:std_logic_vector(7 downto 0):="01100101";--xi的频率494Hz，计算同上
+constant stop:std_logic_vector(7 downto 0):="00000000";--xi的频率494Hz，计算同上
+begin
+final <= freqout;
+
+process(clk)
+begin
+if rising_edge(clk) then
+if freq = "00000000" then--没有输入则不响
+freqout <= '0';--假设输出低则蜂鸣器不响
+else
+if cnt = freq then--计数器
+cnt <= "00000000";
+freqout <= not freqout;--输出取反<=>输出方波
+else
+cnt <= cnt + 1;
+end if;
+end if;
+end if;
+end process;
+
+music:process(clk1)
+begin
+if rising_edge(clk1) then
+if count="0000" then
+freq<=do;
+count<=count+1;
+elsif count="0001" then
+freq<=do;
+count<=count+1;
+elsif count="0010" then
+freq<=so;
+count<=count+1;
+elsif count="0011" then
+freq<=so;
+count<=count+1;
+elsif count="0100" then
+freq<=la;
+count<=count+1;
+elsif count="0101" then
+freq<=la;
+count<=count+1;
+elsif count="0110" then
+freq<=so;
+count<=count+1;
+elsif count="0111" then
+freq<=stop;
+count<=count+1;
+elsif count="1000" then
+freq<=fa;
+count<=count+1;
+elsif count="1001" then
+freq<=fa;
+count<=count+1;
+elsif count="1010" then
+freq<=mi;
+count<=count+1;
+elsif count="1011" then
+freq<=mi;
+count<=count+1;
+elsif count="1100" then
+freq<=re;
+count<=count+1;
+elsif count="1101" then
+freq<=re;
+count<=count+1;
+elsif count="1110" then
+freq<=do;
+count<=count+1;
+end if;
+end if;
+end process music;
+end architecture;
